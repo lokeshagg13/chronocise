@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import classes from "./App.module.css";
+import Form from "./components/Form";
+import Output from "./components/Output";
+import Exercise from "./components/Sequences/Exercise";
+import Welcome from "./components/Sequences/Welcome";
+import Break from "./components/Sequences/Break";
+import Completion from "./components/Sequences/Completion";
+import { useExerciseContext } from "./contexts/ExerciseContext";
 
 function App() {
+  const { appMode, resetApp, restartCurrentExercise } = useExerciseContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.container}>
+      <h1>Chronocise</h1>
+      {appMode === "default" && <Form />}
+      {appMode !== "default" && <Output />}
+      {appMode === "welcome" && <Welcome />}
+      {appMode === "exercise" && (
+        <>
+          <Exercise />
+          <div>
+            <button onClick={restartCurrentExercise}>Restart Current Exercise</button>
+          </div>
+        </>
+      )}
+      {appMode === "break" && <Break />}
+      {appMode === "complete" && (
+        <>
+          <Completion />
+          <div>
+            <button onClick={resetApp}>Start a New Workout</button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
