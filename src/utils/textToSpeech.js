@@ -5,7 +5,8 @@ export const say = async (message) => {
 
   return new Promise((resolve, reject) => {
     const utterance = new SpeechSynthesisUtterance(message);
-
+    utterance.voice = window.speechSynthesis.getVoices()[1]
+    
     const startTime = Date.now();
     utterance.onend = () => {
       resolve();
@@ -15,12 +16,12 @@ export const say = async (message) => {
     utterance.onerror = (error) => {
       reject(error);
     };
-
     window.speechSynthesis.speak(utterance);
   });
 };
 
 export const sayAsync = (message) => {
   const utterance = new SpeechSynthesisUtterance(message);
+  utterance.voice = window.speechSynthesis.getVoices()[1]
   window.speechSynthesis.speak(utterance);
 };
