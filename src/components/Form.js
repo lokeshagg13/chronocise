@@ -22,7 +22,7 @@ function Form() {
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <label>
-        Number of Exercises:
+        Number of Exercises
         <input
           type="number"
           value={localExercises}
@@ -31,7 +31,7 @@ function Form() {
         />
       </label>
       <label>
-        Time per Exercise (seconds):
+        Time per Exercise (seconds)
         <input
           type="number"
           value={localTime}
@@ -40,7 +40,7 @@ function Form() {
         />
       </label>
       <label>
-        Break Time (seconds):
+        Break Time (seconds)
         <input
           type="number"
           value={localBreaks}

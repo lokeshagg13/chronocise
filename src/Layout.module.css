@@ -1,0 +1,61 @@
+/* src/Layout.css */
+
+.layout {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 1s ease-in-out;
+}
+
+.transition{
+  opacity: 0;
+}
+
+.content-container {
+  background-color: none;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .content-container {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+  }
+}
+
+/* Large and XL Screens */
+@media (min-width: 769px) {
+  .content-container {
+    position: absolute;
+    left: 5%;
+    width: 30%;
+  }
+}

@@ -10,9 +10,6 @@ export function ExerciseProvider({ children }) {
   const [output, setOutput] = useState("");
   const [currentExercise, setCurrentExercise] = useState(0);
   const [currentBreak, setCurrentBreak] = useState(1);
-  const [restartCurrentExerciseTrigger, setRestartCurrentExerciseTrigger] =
-    useState(0);
-
   function resetApp() {
     setAppMode("default");
     setNumExercises(0);
@@ -57,10 +54,6 @@ export function ExerciseProvider({ children }) {
     setAppMode("break");
   }
 
-  function restartCurrentExercise() {
-    setRestartCurrentExerciseTrigger(restartCurrentExerciseTrigger + 1);
-  }
-
   return (
     <ExerciseContext.Provider
       value={{
@@ -69,7 +62,6 @@ export function ExerciseProvider({ children }) {
         breakTime,
         currentExercise,
         output,
-        restartCurrentExerciseTrigger,
         setOutput,
         setExerciseData,
         startWorkout,
@@ -77,7 +69,6 @@ export function ExerciseProvider({ children }) {
         startExercise,
         startBreak,
         resetApp,
-        restartCurrentExercise,
       }}
     >
       {children}

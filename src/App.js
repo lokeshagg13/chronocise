@@ -9,7 +9,7 @@ import Completion from "./components/Sequences/Completion";
 import { useExerciseContext } from "./contexts/ExerciseContext";
 
 function App() {
-  const { appMode, resetApp, restartCurrentExercise } = useExerciseContext();
+  const { appMode, resetApp } = useExerciseContext();
 
   return (
     <div className={classes.container}>
@@ -17,14 +17,7 @@ function App() {
       {appMode === "default" && <Form />}
       {appMode !== "default" && <Output />}
       {appMode === "welcome" && <Welcome />}
-      {appMode === "exercise" && (
-        <>
-          <Exercise />
-          <div>
-            <button onClick={restartCurrentExercise}>Restart Current Exercise</button>
-          </div>
-        </>
-      )}
+      {appMode === "exercise" && <Exercise />}
       {appMode === "break" && <Break />}
       {appMode === "complete" && (
         <>
