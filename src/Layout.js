@@ -7,7 +7,7 @@ function Layout({ children }) {
       <div className={classes["background-video-container"]}>
         <video
           id="bg-video"
-          src={`/media/bg.mp4`}
+          src="media/bg.mp4"
           autoPlay
           loop
           muted
