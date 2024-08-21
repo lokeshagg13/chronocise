@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/chronocise/static/css/main.53561113.css",
-    "main.js": "/chronocise/static/js/main.02d208c8.js",
+    "main.js": "/chronocise/static/js/main.2dd60a76.js",
     "index.html": "/chronocise/index.html",
     "main.53561113.css.map": "/chronocise/static/css/main.53561113.css.map",
-    "main.02d208c8.js.map": "/chronocise/static/js/main.02d208c8.js.map"
+    "main.2dd60a76.js.map": "/chronocise/static/js/main.2dd60a76.js.map"
   },
   "entrypoints": [
     "static/css/main.53561113.css",
-    "static/js/main.02d208c8.js"
+    "static/js/main.2dd60a76.js"
   ]
 }
