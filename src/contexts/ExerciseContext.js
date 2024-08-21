@@ -8,8 +8,10 @@ export function ExerciseProvider({ children }) {
   const [timePerExercise, setTimePerExercise] = useState(0);
   const [breakTime, setBreakTime] = useState(0);
   const [output, setOutput] = useState("");
+  const [counterValue, setCounterValue] = useState(-1);
   const [currentExercise, setCurrentExercise] = useState(0);
   const [currentBreak, setCurrentBreak] = useState(1);
+
   function resetApp() {
     setAppMode("default");
     setNumExercises(0);
@@ -62,8 +64,10 @@ export function ExerciseProvider({ children }) {
         breakTime,
         currentExercise,
         output,
+        counterValue,
         setOutput,
         setExerciseData,
+        setCounterValue,
         startWorkout,
         isLastExercise,
         startExercise,

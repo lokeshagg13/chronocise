@@ -3,15 +3,16 @@ import { useExerciseContext } from "../../contexts/ExerciseContext";
 import { say } from "../../utils/textToSpeech";
 
 async function completionSequence(setOutput) {
-  setOutput("Great Job !! Your workout is complete.");
+  setOutput("Workout completed");
   await say("Great Job !!");
   await say("Your workout is complete.");
 }
 
 function Completion() {
-  const { setOutput } = useExerciseContext();
+  const { setOutput, setCounterValue } = useExerciseContext();
 
   useEffect(() => {
+    setCounterValue(-1)
     completionSequence(setOutput);
   }, []);
 

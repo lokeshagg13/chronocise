@@ -6,10 +6,11 @@ import Exercise from "./components/Sequences/Exercise";
 import Welcome from "./components/Sequences/Welcome";
 import Break from "./components/Sequences/Break";
 import Completion from "./components/Sequences/Completion";
+import Counter from "./components/Counter";
 import { useExerciseContext } from "./contexts/ExerciseContext";
 
 function App() {
-  const { appMode, resetApp } = useExerciseContext();
+  const { appMode, resetApp, counterValue } = useExerciseContext();
 
   return (
     <div className={classes.container}>
@@ -27,6 +28,7 @@ function App() {
           </div>
         </>
       )}
+      {counterValue >= 0 && <Counter />}
     </div>
   );
 }

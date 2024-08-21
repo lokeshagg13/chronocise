@@ -3,27 +3,27 @@ import { useExerciseContext } from "../../contexts/ExerciseContext";
 import { say } from "../../utils/textToSpeech";
 import sleep from "../../utils/sleep";
 
-async function welcomeSequence(setOutput, startExercise) {
+async function welcomeSequence(setOutput, startExercise, setCounterValue) {
   setOutput("WELCOME");
-  await say("Welcome to Chronocise !!!");
+  await say("Welcome to Chronocise");
   let counter = 5;
-  setOutput(`Beginning workout in ...`);
+  setOutput(`Beginning workout in`);
   await say(`Beginning workout in`);
   for (; counter > 0; counter--) {
-    setOutput(`Beginning exercise in ${counter} ...`);
-    console.log(counter);
+    setCounterValue(counter);
     const timeSpent = await say(counter);
     await sleep(1000 - timeSpent);
   }
-  setOutput(`Let's Go !!`);
+  setCounterValue(-1);
+  setOutput(`Let's Go`);
   await say("Let's go");
   startExercise();
 }
 
 function Welcome() {
-  const { setOutput, startExercise } = useExerciseContext();
+  const { setOutput, startExercise, setCounterValue } = useExerciseContext();
   useEffect(() => {
-    welcomeSequence(setOutput, startExercise);
+    welcomeSequence(setOutput, startExercise, setCounterValue);
   }, []);
 
   return null;

@@ -7,7 +7,8 @@ async function exerciseSequence(
   timePerExercise,
   setOutput,
   startBreak,
-  isLastExercise
+  isLastExercise,
+  setCounterValue
 ) {
   const motivationalPhrases = [
     "Well done!",
@@ -44,11 +45,12 @@ async function exerciseSequence(
     return motivationalPhrases[motivationalPhraseIndex];
   }
 
+  setOutput("Exercise time");
   let counter = timePerExercise + 1;
   let waitTimeTillNextMotivation = Math.floor(Math.random() * (16 - 10)) + 10;
   let exerciseInterval = setInterval(async () => {
     counter--;
-    setOutput(`Exercise time: ${counter} seconds ...`);
+    setCounterValue(counter);
     if (
       counter > 10 &&
       counter < timePerExercise - waitTimeTillNextMotivation
@@ -59,15 +61,16 @@ async function exerciseSequence(
         (Math.floor(Math.random() * (16 - 10)) + 10);
     }
     if (counter <= 10) {
-      setOutput(`Exercise time: ${counter + 1} seconds ...`);
+      setCounterValue(counter + 1);
       clearInterval(exerciseInterval);
       for (let counter = 10; counter > 0; counter--) {
-        setOutput(`Exercise time: ${counter} seconds ...`);
+        setCounterValue(counter);
         let timeSpent = await say(counter);
         await sleep(1000 - timeSpent);
       }
       if (!isLastExercise()) {
         setOutput(`Break Time`);
+        setCounterValue(-1);
         await say(getRandomMotivationalPhrase());
         await say("It's break time");
       }
@@ -83,10 +86,17 @@ function Exercise() {
     setOutput,
     isLastExercise,
     startBreak,
+    setCounterValue,
   } = useExerciseContext();
 
   useEffect(() => {
-    exerciseSequence(timePerExercise, setOutput, startBreak, isLastExercise);
+    exerciseSequence(
+      timePerExercise,
+      setOutput,
+      startBreak,
+      isLastExercise,
+      setCounterValue
+    );
   }, [currentExercise]);
   return null;
 }
