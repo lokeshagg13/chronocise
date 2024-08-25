@@ -21,6 +21,6 @@ export const say = async (message, voice) => {
 
 export const sayAsync = (message, voice) => {
   const utterance = new SpeechSynthesisUtterance(message);
-  utterance.voice = voice.ref;
+  utterance.voice = voice ? voice.ref : window.speechSynthesis.getVoices()[1];
   window.speechSynthesis.speak(utterance);
 };
