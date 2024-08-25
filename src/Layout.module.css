@@ -15,6 +15,7 @@
   height: 100%;
   overflow: hidden;
   z-index: -1;
+  background-color: black;
 }
 
 .background-video {
@@ -40,6 +41,7 @@
   top: 20px;
   right: 20px;
   z-index: 2;
+  background-color: white;
 }
 
 .settings-icon {
@@ -47,7 +49,9 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: white;
+  color: black;
+  margin: 0;
+  padding: 5px 10px;
 }
 
 .settings-icon:hover {

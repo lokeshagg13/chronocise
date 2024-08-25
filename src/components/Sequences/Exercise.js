@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useExerciseContext } from "../../contexts/ExerciseContext";
+import { useAppContext } from "../../contexts/AppContext";
 import { say, sayAsync } from "../../utils/textToSpeech";
 import sleep from "../../utils/sleep";
 
@@ -8,7 +9,8 @@ async function exerciseSequence(
   setOutput,
   startBreak,
   isLastExercise,
-  setCounterValue
+  setCounterValue,
+  voice
 ) {
   const motivationalPhrases = [
     "Well done!",
@@ -55,7 +57,7 @@ async function exerciseSequence(
       counter > 10 &&
       counter < timePerExercise - waitTimeTillNextMotivation
     ) {
-      sayAsync(getRandomMotivationalPhrase());
+      sayAsync(getRandomMotivationalPhrase(), voice);
       waitTimeTillNextMotivation =
         waitTimeTillNextMotivation +
         (Math.floor(Math.random() * (16 - 10)) + 10);
@@ -65,14 +67,14 @@ async function exerciseSequence(
       clearInterval(exerciseInterval);
       for (let counter = 10; counter > 0; counter--) {
         setCounterValue(counter);
-        let timeSpent = await say(counter);
+        let timeSpent = await say(counter, voice);
         await sleep(1000 - timeSpent);
       }
       if (!isLastExercise()) {
         setOutput(`Break Time`);
         setCounterValue(-1);
-        await say(getRandomMotivationalPhrase());
-        await say("It's break time");
+        await say(getRandomMotivationalPhrase(), voice);
+        await say("It's break time", voice);
       }
       startBreak();
     }
@@ -89,13 +91,16 @@ function Exercise() {
     setCounterValue,
   } = useExerciseContext();
 
+  const { voice } = useAppContext();
+
   useEffect(() => {
     exerciseSequence(
       timePerExercise,
       setOutput,
       startBreak,
       isLastExercise,
-      setCounterValue
+      setCounterValue,
+      voice
     );
   }, [currentExercise]);
   return null;

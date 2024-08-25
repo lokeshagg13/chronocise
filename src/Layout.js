@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useAppContext } from "./contexts/AppContext";
 import classes from "./Layout.module.css";
 
 function Layout({ children }) {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [voiceList, setVoiceList] = useState([]);
+  const { voice, changeVoice } = useAppContext();
 
   const toggleSettingsModal = () => {
     setShowSettingsModal((showSettingsModal) => !showSettingsModal);
@@ -21,12 +24,37 @@ function Layout({ children }) {
     };
   }, [showSettingsModal]);
 
+  useEffect(() => {
+    const voices = window.speechSynthesis.getVoices();
+    const allVoices = [];
+    voices.forEach((voice, index) => {
+      let voiceName = `${voice.name} (${voice.lang})`;
+      let voiceID = index;
+      allVoices.push({
+        id: voiceID,
+        name: voiceName,
+        ref: voices[voiceID],
+      });
+    });
+    if (allVoices.length === 0) {
+      changeVoice(window.speechSynthesis.getVoices()[1]);
+    } else {
+      changeVoice(allVoices[1]);
+      console.log(allVoices);
+      setVoiceList(allVoices);
+    }
+  }, []);
+
+  function voiceChangeHandler(event) {
+    changeVoice(voiceList[event.target.value]);
+  }
+
   return (
     <div className={classes.layout}>
       <div className={classes["background-video-container"]}>
         <video
           id="bg-video"
-          src="media/bg.mp4"
+          src="/media/bg.mp4"
           autoPlay
           loop
           muted
@@ -35,15 +63,24 @@ function Layout({ children }) {
       </div>
 
       <div className={classes["settings-container"]}>
-        <button className={classes["settings-icon"]} onClick={toggleSettingsModal}>
+        <button
+          className={classes["settings-icon"]}
+          onClick={toggleSettingsModal}
+        >
           &#9881;
         </button>
         {showSettingsModal && (
           <div className={classes["settings-modal"]}>
-            <select className={classes["voice-dropdown"]}>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+            <select
+              className={classes["voice-dropdown"]}
+              onChange={voiceChangeHandler}
+              value={voice.id}
+            >
+              {voiceList.map((voice) => (
+                <option key={voice.id} value={voice.id}>
+                  {voice.name}
+                </option>
+              ))}
             </select>
           </div>
         )}

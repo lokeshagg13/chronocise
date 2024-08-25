@@ -1,12 +1,11 @@
-export const say = async (message) => {
+export const say = async (message, voice) => {
   if (!window.speechSynthesis) {
     throw new Error("Speech Synthesis is not supported in this browser.");
   }
 
   return new Promise((resolve, reject) => {
     const utterance = new SpeechSynthesisUtterance(message);
-    utterance.voice = window.speechSynthesis.getVoices()[1]
-    utterance.lang = 'en-US'
+    utterance.voice = voice.ref;
     const startTime = Date.now();
     utterance.onend = () => {
       resolve();
@@ -20,8 +19,8 @@ export const say = async (message) => {
   });
 };
 
-export const sayAsync = (message) => {
+export const sayAsync = (message, voice) => {
   const utterance = new SpeechSynthesisUtterance(message);
-  utterance.voice = window.speechSynthesis.getVoices()[1]
+  utterance.voice = voice.ref;
   window.speechSynthesis.speak(utterance);
 };
