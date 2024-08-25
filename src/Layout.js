@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useAppContext } from "./contexts/AppContext";
 import classes from "./Layout.module.css";
+import SettingsIcon from "./utils/settingsIcon";
+import SettingsDisabledIcon from "./utils/settingsDisabledIcon";
 
 function Layout({ children }) {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [voiceList, setVoiceList] = useState([]);
-  const { voice, changeVoice } = useAppContext();
+  const { voice, settingsEnabled, changeVoice } = useAppContext();
 
   const toggleSettingsModal = () => {
     setShowSettingsModal((showSettingsModal) => !showSettingsModal);
@@ -36,6 +38,7 @@ function Layout({ children }) {
         ref: voices[voiceID],
       });
     });
+    console.log(settingsEnabled)
     if (allVoices.length === 0) {
       changeVoice(window.speechSynthesis.getVoices()[1]);
     } else {
@@ -66,8 +69,9 @@ function Layout({ children }) {
         <button
           className={classes["settings-icon"]}
           onClick={toggleSettingsModal}
+          disabled={!settingsEnabled}
         >
-          &#9881;
+          {settingsEnabled ? <SettingsIcon /> : <SettingsDisabledIcon />}
         </button>
         {showSettingsModal && (
           <div className={classes["settings-modal"]}>

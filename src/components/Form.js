@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useExerciseContext } from "../contexts/ExerciseContext";
+import { useAppContext } from "../contexts/AppContext";
+
 import classes from "./Form.module.css";
 
 function Form() {
   const { setExerciseData, startWorkout } = useExerciseContext();
+  const { disableSettings } = useAppContext();
 
   const [localExercises, setLocalExercises] = useState(0);
   const [localTime, setLocalTime] = useState(0);
@@ -16,6 +19,7 @@ function Form() {
       parseInt(localTime),
       parseInt(localBreaks)
     );
+    disableSettings();
     startWorkout();
   };
 

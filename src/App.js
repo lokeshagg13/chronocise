@@ -8,9 +8,11 @@ import Break from "./components/Sequences/Break";
 import Completion from "./components/Sequences/Completion";
 import Counter from "./components/Counter";
 import { useExerciseContext } from "./contexts/ExerciseContext";
+import { useAppContext } from "./contexts/AppContext";
 
 function App() {
   const { appMode, resetApp, counterValue } = useExerciseContext();
+  const { enableSettings } = useAppContext();
 
   return (
     <div className={classes.container}>
@@ -24,7 +26,14 @@ function App() {
         <>
           <Completion />
           <div>
-            <button onClick={resetApp}>Start a New Workout</button>
+            <button
+              onClick={() => {
+                resetApp();
+                enableSettings();
+              }}
+            >
+              Start a New Workout
+            </button>
           </div>
         </>
       )}
