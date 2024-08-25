@@ -28,7 +28,7 @@ async function breakSequence(
       for (let counter = 10; counter > 0; counter--) {
         setOutput(`Next Exercise start in`);
         setCounterValue(counter);
-        let timeSpent = await say(counter);
+        let timeSpent = await say(counter, voice);
         await sleep(1000 - timeSpent);
       }
       setOutput(`Go`);
