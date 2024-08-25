@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/chronocise/static/css/main.6883d0bc.css",
-    "main.js": "/chronocise/static/js/main.dfb28bf6.js",
+    "main.css": "/chronocise/static/css/main.33fe0b0d.css",
+    "main.js": "/chronocise/static/js/main.afe3af00.js",
     "index.html": "/chronocise/index.html",
-    "main.6883d0bc.css.map": "/chronocise/static/css/main.6883d0bc.css.map",
-    "main.dfb28bf6.js.map": "/chronocise/static/js/main.dfb28bf6.js.map"
+    "main.33fe0b0d.css.map": "/chronocise/static/css/main.33fe0b0d.css.map",
+    "main.afe3af00.js.map": "/chronocise/static/js/main.afe3af00.js.map"
   },
   "entrypoints": [
-    "static/css/main.6883d0bc.css",
-    "static/js/main.dfb28bf6.js"
+    "static/css/main.33fe0b0d.css",
+    "static/js/main.afe3af00.js"
   ]
 }
