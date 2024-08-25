@@ -6,7 +6,7 @@ export const say = async (message) => {
   return new Promise((resolve, reject) => {
     const utterance = new SpeechSynthesisUtterance(message);
     utterance.voice = window.speechSynthesis.getVoices()[1]
-    utterance.voice = 'en-US'
+    utterance.lang = 'en-US'
     const startTime = Date.now();
     utterance.onend = () => {
       resolve();
