@@ -4,7 +4,8 @@ import { useAppContext } from "./contexts/AppContext";
 import classes from "./Layout.module.css";
 import SettingsIcon from "./utils/settingsIcon";
 import SettingsDisabledIcon from "./utils/settingsDisabledIcon";
-
+const voices = window.speechSynthesis.getVoices();
+    
 function Layout({ children }) {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [voiceList, setVoiceList] = useState([]);
@@ -28,7 +29,6 @@ function Layout({ children }) {
   }, [showSettingsModal]);
 
   useEffect(() => {
-    const voices = window.speechSynthesis.getVoices();
     const allVoices = [];
     voices.forEach((voice, index) => {
       let voiceName = `${voice.name} (${voice.lang})`;
@@ -40,7 +40,17 @@ function Layout({ children }) {
       });
     });
     if (allVoices.length === 0) {
-      changeVoice(window.speechSynthesis.getVoices()[1]);
+      const voiceName = window.speechSynthesis.getVoices()[1]
+        ? `${window.speechSynthesis.getVoices()[1].name} (${
+            window.speechSynthesis.getVoices()[1].lang
+          })`
+        : "";
+      const autoVoice = {
+        id: 0,
+        name: voiceName,
+        ref: window.speechSynthesis.getVoices()[1],
+      };
+      changeVoice(autoVoice);
     } else {
       changeVoice(allVoices[1]);
       console.log(allVoices);
