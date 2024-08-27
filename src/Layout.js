@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { sayAsync } from "./utils/textToSpeech";
 import { useAppContext } from "./contexts/AppContext";
 import classes from "./Layout.module.css";
 import SettingsIcon from "./utils/settingsIcon";
@@ -38,7 +39,6 @@ function Layout({ children }) {
         ref: voices[voiceID],
       });
     });
-    console.log(settingsEnabled)
     if (allVoices.length === 0) {
       changeVoice(window.speechSynthesis.getVoices()[1]);
     } else {
@@ -46,10 +46,12 @@ function Layout({ children }) {
       console.log(allVoices);
       setVoiceList(allVoices);
     }
+    // eslint-disable-next-line
   }, []);
 
   function voiceChangeHandler(event) {
     changeVoice(voiceList[event.target.value]);
+    sayAsync("Hello", voiceList[event.target.value]);
   }
 
   return (

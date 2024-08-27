@@ -46,6 +46,7 @@ function Break() {
 
   useEffect(() => {
     breakSequence(breakTime, setOutput, startExercise, setCounterValue, voice);
+// eslint-disable-next-line
   }, [currentBreak]);
 
   return null;
